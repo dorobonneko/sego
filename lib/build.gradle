@@ -1,11 +1,11 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 21
     buildToolsVersion "21.1.0"
 
     defaultConfig {
-        applicationId "com.moe.sego"
+        applicationId "com.moe.tinyimage"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1
@@ -20,7 +20,6 @@ android {
 }
 
 dependencies {
-	compile project(':lib')
-	compile 'com.android.support:design:27.0.+'
+	//compile 'com.squareup.okhttp3:okhttp:3.4.+'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }
