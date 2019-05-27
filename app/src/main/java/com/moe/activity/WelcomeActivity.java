@@ -21,11 +21,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.widget.Toolbar;
+import com.moe.fragment.TagsFragment;
+import com.moe.fragment.CategoriesFragment;
 
 public class WelcomeActivity extends Activity implements NavigationView.OnNavigationItemSelectedListener
 {
 private Fragment current;
 private DrawerLayout mDrawerLayout;
+private NavigationView mNavigationView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -33,7 +36,7 @@ private DrawerLayout mDrawerLayout;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		mDrawerLayout=(DrawerLayout) findViewById(R.id.drawerLayout);
-		NavigationView mNavigationView=(NavigationView) findViewById(R.id.navigationView);
+		mNavigationView=(NavigationView) findViewById(R.id.navigationView);
 		mNavigationView.setNavigationItemSelectedListener(this);
 		onNavigationItemSelected(mNavigationView.getMenu().findItem(R.id.index));
 		setActionBar((Toolbar)findViewById(R.id.toolbar));
@@ -97,6 +100,40 @@ private DrawerLayout mDrawerLayout;
 					current=f;
 				}
 				break;
+			case R.id.tags:
+				{
+					Fragment f=getFragmentManager().findFragmentByTag(String.valueOf(item.getItemId()));
+					if(f==null){
+						f=new TagsFragment();
+						}
+					FragmentTransaction ft=getFragmentManager().beginTransaction();
+					if(current!=null)
+						ft.hide(current);
+					if(f.isAdded())
+						ft.show(f);
+					else
+						ft.add(R.id.fragment,f,String.valueOf(item.getItemId()));
+					ft.commitAllowingStateLoss();
+					current=f;
+				}
+				break;
+			case R.id.class_:
+				{
+					Fragment f=getFragmentManager().findFragmentByTag(String.valueOf(item.getItemId()));
+					if(f==null){
+						f=new CategoriesFragment();
+						}
+					FragmentTransaction ft=getFragmentManager().beginTransaction();
+					if(current!=null)
+						ft.hide(current);
+					if(f.isAdded())
+						ft.show(f);
+					else
+						ft.add(R.id.fragment,f,String.valueOf(item.getItemId()));
+					ft.commitAllowingStateLoss();
+					current=f;
+				}
+				break;
 		}
 		mDrawerLayout.closeDrawer(Gravity.START);
 		return true;
@@ -107,6 +144,7 @@ private DrawerLayout mDrawerLayout;
 	{
 		if(current!=null&&!current.getTag().equals(String.valueOf(R.id.index))){
 			getFragmentManager().beginTransaction().hide(current).show(current=getFragmentManager().findFragmentByTag(String.valueOf(R.id.index))).commitAllowingStateLoss();
+			mNavigationView.getMenu().findItem(R.id.index).setChecked(true);
 		}else
 		moveTaskToBack(false);
 	}
