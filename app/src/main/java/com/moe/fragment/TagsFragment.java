@@ -44,7 +44,7 @@ public class TagsFragment extends Fragment implements SwipeRefreshLayout.OnRefre
 		refresh=view.findViewById(R.id.swipeRefreshLayout);
 		refresh.setOnRefreshListener(this);
 		recyclerView.setLayoutManager(new WaterFullLayoutManager());
-		recyclerView.addItemDecoration(new ItemDecoration((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,15,recyclerView.getResources().getDisplayMetrics())));
+		recyclerView.addItemDecoration(new ItemDecoration((int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,4,recyclerView.getResources().getDisplayMetrics())));
 		recyclerView.setAdapter(mTagsAdapter=new TagsAdapter(list=new ArrayList<>()));
 		mTagsAdapter.setOnClickListener(this);
 	}

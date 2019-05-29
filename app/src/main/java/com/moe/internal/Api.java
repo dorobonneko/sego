@@ -3,7 +3,7 @@ import android.content.Context;
 
 public class Api
 {
-	public static final String HOST_1="https://www.ganbi10.com";
+	public static final String HOST_1="https://www.qipa20.com";
 	public static String getHost(Context context){
 		return HOST_1;
 	}
